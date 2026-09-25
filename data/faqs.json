@@ -1,0 +1,44 @@
+[
+  {
+    "id": "faq-1",
+    "categoria": "creditos",
+    "pregunta": "¿Qué requisitos básicos se solicitan para un crédito de libre inversión?",
+    "respuesta": "Para acceder a un crédito de libre inversión se requiere ser mayor de 18 años, contar con ingresos demostrables superiores a 1.5 SMMLV, presentar documento de identidad al 150%, certificación laboral actualizada (o declaración de renta en caso de independientes) y los comprobantes de pago de los últimos 3 meses."
+  },
+  {
+    "id": "faq-2",
+    "categoria": "creditos",
+    "pregunta": "¿Cómo se calcula la cuota aproximada en el simulador de crédito?",
+    "respuesta": "El simulador utiliza el sistema de amortización francés de cuota fija. A partir del monto solicitado, el plazo en meses y la tasa de interés mensual vencida (M.V.), calcula el valor periódico mensual exacto, discriminando el abono a capital e intereses."
+  },
+  {
+    "id": "faq-3",
+    "categoria": "cdt",
+    "pregunta": "¿Qué es un CDT y qué plazo mínimo puedo contratar?",
+    "respuesta": "Un Certificado de Depósito a Término (CDT) es un instrumento de inversión de renta fija mediante el cual depositas una suma de dinero por un tiempo acordado, con la garantía de recibir tu capital inicial más unos intereses convenidos a una tasa fija asegurada. El plazo mínimo de apertura es de 30 días y hasta 720 días o más."
+  },
+  {
+    "id": "faq-4",
+    "categoria": "cdt",
+    "pregunta": "¿Las ganancias de un CDT tienen retención en la fuente?",
+    "respuesta": "Sí, de acuerdo con la legislación tributaria colombiana vigente, los rendimientos financieros de depósitos e inversiones a término están sujetos a una retención en la fuente del 4% únicamente sobre los intereses ganados (no sobre el capital invertido)."
+  },
+  {
+    "id": "faq-5",
+    "categoria": "productos",
+    "pregunta": "¿Mi dinero en cuentas de ahorro y CDT está protegido?",
+    "respuesta": "Sí, todos los depósitos en cuentas de ahorro y Certificados de Depósito a Término de nuestra entidad están amparados por el seguro de depósitos del Fondo de Garantías de Instituciones Financieras (Fogafín), hasta por un valor máximo de 50 millones de pesos por titular."
+  },
+  {
+    "id": "faq-6",
+    "categoria": "sistema",
+    "pregunta": "¿Quiénes pueden acceder al módulo de 'Acceso al usuario'?",
+    "respuesta": "El módulo de Acceso al Usuario está reservado para los colaboradores internos de la entidad: Asesores Financieros (quienes gestionan simulaciones asistidas y atención directa a clientes) y Administradores del Sistema (quienes gestionan el catálogo, actualizan tasas vigentes y consultan los reportes y PQRS)."
+  },
+  {
+    "id": "faq-7",
+    "categoria": "sistema",
+    "pregunta": "¿Los resultados de los simuladores son vinculantes o definitivos?",
+    "respuesta": "Los simuladores presentan valores de carácter informativo y aproximado basados en las condiciones y tasas vigentes de la entidad. Las cifras finales pueden presentar variaciones menores al momento del desembolso o constitución debido a seguros asociados, fechas exactas de corte y evaluación de riesgo crediticio individual."
+  }
+]

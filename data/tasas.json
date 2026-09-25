@@ -1,0 +1,55 @@
+{
+  "creditos": [
+    {
+      "tipo": "libre_inversion",
+      "nombre": "Libre Inversión",
+      "tasaNominalMensual": 1.45,
+      "tasaEfectivaAnual": 18.80,
+      "montoMinimo": 1000000,
+      "montoMaximo": 80000000,
+      "plazoMinimoMeses": 12,
+      "plazoMaximoMeses": 72
+    },
+    {
+      "tipo": "vivienda",
+      "nombre": "Vivienda (Hipotecario)",
+      "tasaNominalMensual": 0.95,
+      "tasaEfectivaAnual": 12.00,
+      "montoMinimo": 20000000,
+      "montoMaximo": 500000000,
+      "plazoMinimoMeses": 60,
+      "plazoMaximoMeses": 240
+    },
+    {
+      "tipo": "libranza",
+      "nombre": "Libranza",
+      "tasaNominalMensual": 1.15,
+      "tasaEfectivaAnual": 14.70,
+      "montoMinimo": 1000000,
+      "montoMaximo": 100000000,
+      "plazoMinimoMeses": 12,
+      "plazoMaximoMeses": 96
+    },
+    {
+      "tipo": "vehiculo",
+      "nombre": "Vehículo",
+      "tasaNominalMensual": 1.30,
+      "tasaEfectivaAnual": 16.70,
+      "montoMinimo": 5000000,
+      "montoMaximo": 150000000,
+      "plazoMinimoMeses": 12,
+      "plazoMaximoMeses": 84
+    }
+  ],
+  "cdt": {
+    "rangos": [
+      { "diasMin": 30, "diasMax": 89, "tasaEA": 9.50 },
+      { "diasMin": 90, "diasMax": 179, "tasaEA": 10.50 },
+      { "diasMin": 180, "diasMax": 359, "tasaEA": 11.20 },
+      { "diasMin": 360, "diasMax": 720, "tasaEA": 11.80 }
+    ],
+    "montoMinimo": 500000,
+    "montoMaximo": 1000000000,
+    "retencionFuente": 4.0
+  }
+}

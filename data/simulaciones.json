@@ -1,0 +1,38 @@
+[
+  {
+    "id": "sim-1",
+    "fecha": "2026-08-12T10:45:00.000Z",
+    "tipo": "credito",
+    "clienteNombre": "Juan Pablo Restrepo",
+    "clienteIdentificacion": "1053829102",
+    "clienteEmail": "jpablo@hotmail.com",
+    "detalles": {
+      "tipoCredito": "Libre Inversión",
+      "monto": 15000000,
+      "plazoMeses": 36,
+      "tasaNominalMensual": 1.45,
+      "cuotaMensual": 539655,
+      "totalPagar": 19427580,
+      "totalIntereses": 4427580
+    },
+    "creadoPor": "Carlos Alberto Mendoza (Asesor)"
+  },
+  {
+    "id": "sim-2",
+    "fecha": "2026-08-14T16:20:00.000Z",
+    "tipo": "cdt",
+    "clienteNombre": "Marta Lucía Osorio",
+    "clienteIdentificacion": "30456123",
+    "clienteEmail": "marta.osorio@yahoo.es",
+    "detalles": {
+      "montoInversion": 20000000,
+      "plazoDias": 360,
+      "tasaEA": 11.8,
+      "rendimientoBruto": 2360000,
+      "retencionFuente": 94400,
+      "rendimientoNeto": 2265600,
+      "totalRecibir": 22265600
+    },
+    "creadoPor": "Carlos Alberto Mendoza (Asesor)"
+  }
+]

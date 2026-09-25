@@ -1,0 +1,24 @@
+[
+  {
+    "id": "msg-1",
+    "fecha": "2026-08-10T14:32:00.000Z",
+    "nombre": "Andrés Felipe Gómez",
+    "email": "andres.gomez@gmail.com",
+    "telefono": "3124567890",
+    "tipoConsulta": "credito",
+    "asunto": "Solicitud de ampliación de plazo crédito",
+    "mensaje": "Buenas tardes, realicé una simulación de crédito de libre inversión por $25.000.000 y me gustaría saber si puedo extender el plazo a 84 meses.",
+    "estado": "pendiente"
+  },
+  {
+    "id": "msg-2",
+    "fecha": "2026-08-11T09:15:00.000Z",
+    "nombre": "Carolina Herrera",
+    "email": "carolina.h@outlook.com",
+    "telefono": "3109876543",
+    "tipoConsulta": "cdt",
+    "asunto": "Consulta tasa preferencial CDT",
+    "mensaje": "Quisiera información sobre tasas preferenciales para una inversión en CDT superior a 50 millones de pesos a 360 días.",
+    "estado": "atendido"
+  }
+]

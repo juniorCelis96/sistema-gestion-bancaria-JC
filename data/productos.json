@@ -1,0 +1,162 @@
+[
+  {
+    "id": "prod-1",
+    "nombre": "Cuenta de Ahorro Tradicional",
+    "categoria": "cuentas",
+    "categoriaNombre": "Cuentas de Ahorro",
+    "descripcion": "La cuenta ideal para administrar tus ingresos y ahorros diarios con total seguridad y disponibilidad inmediata.",
+    "caracteristicas": [
+      "Sin cuota de manejo durante los primeros 6 meses",
+      "Retiros ilimitados y sin costo en toda nuestra red de cajeros automáticos",
+      "Intereses liquidados diariamente sobre saldo disponible",
+      "Acceso gratuito a transferencias interbancarias y portal web"
+    ],
+    "requisitos": [
+      "Documento de identidad original (C.C. o C.E.)",
+      "Monto de apertura mínimo: $50.000 COP",
+      "Formulario de vinculación debidamente diligenciado"
+    ],
+    "tasaReferencial": "Hasta 3.50% E.A. sobre saldo",
+    "destacado": true
+  },
+  {
+    "id": "prod-2",
+    "nombre": "Cuenta Nómina Preferencial",
+    "categoria": "cuentas",
+    "categoriaNombre": "Cuentas de Ahorro",
+    "descripcion": "Diseñada para empleados y pensionados, con exención total de cobros operativos y beneficios en créditos.",
+    "caracteristicas": [
+      "0% de cuota de manejo vitalicia manteniendo tu pago de nómina",
+      "Adelanto de nómina sin intereses hasta por el 30% del salario",
+      "Tasas preferenciales de crédito con descuento de nómina",
+      "Seguro de vida y asistencia en emergencias incluido"
+    ],
+    "requisitos": [
+      "Carta laboral con vigencia no mayor a 30 días",
+      "Copia de cédula de ciudadanía",
+      "Convenio de nómina activo entre tu empresa y la entidad"
+    ],
+    "tasaReferencial": "Hasta 4.00% E.A.",
+    "destacado": false
+  },
+  {
+    "id": "prod-3",
+    "nombre": "CDT Digital Tasa Fija",
+    "categoria": "cdt",
+    "categoriaNombre": "Inversión y CDT",
+    "descripcion": "Haz crecer tu capital de forma segura con rentabilidad fija garantizada respaldada por Fogafín.",
+    "caracteristicas": [
+      "Plazos flexibles desde 30 hasta 720 días",
+      "Apertura 100% digital o a través de nuestros asesores",
+      "Tasa fija durante toda la vigencia del título",
+      "Protección de seguro de depósitos Fogafín"
+    ],
+    "requisitos": [
+      "Monto mínimo de inversión: $500.000 COP",
+      "Ser mayor de edad con documento de identidad vigente",
+      "Cuenta activa para el desembolso de capital e intereses"
+    ],
+    "tasaReferencial": "Hasta 11.80% E.A. según plazo",
+    "destacado": true
+  },
+  {
+    "id": "prod-4",
+    "nombre": "CDT Renta Periódica Mensual",
+    "categoria": "cdt",
+    "categoriaNombre": "Inversión y CDT",
+    "descripcion": "Recibe rendimientos fijos mensuales directamente en tu cuenta mientras tu capital se mantiene seguro.",
+    "caracteristicas": [
+      "Abono mensual programado de intereses a tu cuenta",
+      "Plazos desde 180 hasta 1080 días",
+      "Excelente alternativa para generar ingresos pasivos constantes",
+      "Título negociable en mercado secundario"
+    ],
+    "requisitos": [
+      "Monto mínimo de constitución: $5.000.000 COP",
+      "Cédula de ciudadanía o extranjería",
+      "Definición de cuenta receptora de rendimientos"
+    ],
+    "tasaReferencial": "Hasta 11.10% E.A.",
+    "destacado": false
+  },
+  {
+    "id": "prod-5",
+    "nombre": "Crédito de Libre Inversión",
+    "categoria": "creditos",
+    "categoriaNombre": "Líneas de Crédito",
+    "descripcion": "Financiación ágil para tus proyectos personales, consolidación de deudas, viajes o imprevistos.",
+    "caracteristicas": [
+      "Monto desde $1.000.000 hasta $80.000.000 COP",
+      "Plazos de pago desde 12 hasta 72 meses",
+      "Cuota fija mensual durante toda la vigencia del crédito",
+      "Estudio de crédito sin costo y desembolso en 24 horas"
+    ],
+    "requisitos": [
+      "Ingresos mínimos demostrables desde 1.5 SMMLV",
+      "Certificado laboral y últimos 3 desprendibles de pago",
+      "Fotocopia del documento de identidad al 150%"
+    ],
+    "tasaReferencial": "Desde 1.45% M.V. (18.80% E.A.)",
+    "destacado": true
+  },
+  {
+    "id": "prod-6",
+    "nombre": "Crédito de Vivienda (Hipotecario)",
+    "categoria": "creditos",
+    "categoriaNombre": "Líneas de Crédito",
+    "descripcion": "Convierte el sueño de tener vivienda propia nueva o usada en realidad con las mejores condiciones financieras.",
+    "caracteristicas": [
+      "Financiación de hasta el 70% en No VIS y 80% en VIS",
+      "Plazos amplios de amortización desde 60 hasta 240 meses (20 años)",
+      "Posibilidad de abonos a capital extraordinarios sin penalización",
+      "Beneficios tributarios por deducción de intereses de vivienda"
+    ],
+    "requisitos": [
+      "Ingresos familiares consolidados desde 2 SMMLV",
+      "Promesa de compraventa del inmueble a financiar",
+      "Certificado de tradición y libertad del inmueble libre de gravámenes"
+    ],
+    "tasaReferencial": "Desde 0.95% M.V. (12.00% E.A.)",
+    "destacado": true
+  },
+  {
+    "id": "prod-7",
+    "nombre": "Crédito por Libranza",
+    "categoria": "creditos",
+    "categoriaNombre": "Líneas de Crédito",
+    "descripcion": "Crédito con descuento directo por nómina con tasas de interés significativamente más bajas y sin codeudor.",
+    "caracteristicas": [
+      "Descuento automático mensual vía nómina o pensión",
+      "Montos hasta $100.000.000 COP según capacidad de endeudamiento",
+      "Plazos de amortización hasta 96 meses",
+      "Sin codeudor para empresas en convenio"
+    ],
+    "requisitos": [
+      "Empresa o entidad de pensiones con convenio de libranza vigente",
+      "Últimos 2 desprendibles de nómina o mesada pensional",
+      "Documento de identidad al 150%"
+    ],
+    "tasaReferencial": "Desde 1.15% M.V. (14.70% E.A.)",
+    "destacado": false
+  },
+  {
+    "id": "prod-8",
+    "nombre": "Crédito de Vehículo",
+    "categoria": "creditos",
+    "categoriaNombre": "Líneas de Crédito",
+    "descripcion": "Estrena vehículo nuevo o usado con cuotas fijas y póliza colectiva todo riesgo financiada.",
+    "caracteristicas": [
+      "Financiación de hasta el 90% del valor comercial del vehículo",
+      "Plazos de 12 a 84 meses",
+      "Aprobación rápida en concesionarios aliados",
+      "Prendas flexibles y tasas preferenciales para vehículos híbridos/eléctricos"
+    ],
+    "requisitos": [
+      "Cotización del vehículo o peritaje técnico para usados",
+      "Ingresos mínimos desde 2 SMMLV",
+      "Extractos bancarios de los últimos 3 meses"
+    ],
+    "tasaReferencial": "Desde 1.30% M.V. (16.70% E.A.)",
+    "destacado": false
+  }
+]

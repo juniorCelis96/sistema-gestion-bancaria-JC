@@ -1,0 +1,90 @@
+[
+  {
+    "id": "of-1",
+    "nombre": "Sucursal Principal La Dorada",
+    "tipo": "sucursal",
+    "ciudad": "La Dorada",
+    "departamento": "Caldas",
+    "direccion": "Calle 14 # 3-28, Centro",
+    "telefono": "(606) 857 2300",
+    "horario": "Lunes a Viernes: 8:00 AM - 11:30 AM y 2:00 PM - 4:30 PM | Sábados: 9:00 AM - 1:00 PM",
+    "servicios": ["Asesoría Integral", "Cajas", "Crédito y CDT", "Atención a Empresas", "Cajero Automático"]
+  },
+  {
+    "id": "of-2",
+    "nombre": "Cajero Automático Parque Simón Bolívar",
+    "tipo": "cajero",
+    "ciudad": "La Dorada",
+    "departamento": "Caldas",
+    "direccion": "Carrera 4 con Calle 15 (Frente al Parque)",
+    "telefono": "Línea Nacional 01 8000 912 345",
+    "horario": "24 Horas / 7 Días",
+    "servicios": ["Retiros", "Consultas", "Transferencias", "Avances"]
+  },
+  {
+    "id": "of-3",
+    "nombre": "Sucursal Manizales Centro Histórico",
+    "tipo": "sucursal",
+    "ciudad": "Manizales",
+    "departamento": "Caldas",
+    "direccion": "Carrera 22 # 21-15, Plaza de Bolívar",
+    "telefono": "(606) 884 1020",
+    "horario": "Lunes a Viernes: 8:00 AM - 4:00 PM (Jornada Continua)",
+    "servicios": ["Asesoría Integral", "Mesa de Dinero CDT", "Crédito Hipotecario", "Cajas", "Cajero 24h"]
+  },
+  {
+    "id": "of-4",
+    "nombre": "Cajero Automático Centro Comercial Cable Plaza",
+    "tipo": "cajero",
+    "ciudad": "Manizales",
+    "departamento": "Caldas",
+    "direccion": "Av. Santander # 65-11, Nivel 1",
+    "telefono": "Línea Nacional 01 8000 912 345",
+    "horario": "Lunes a Domingo: 6:00 AM - 10:00 PM",
+    "servicios": ["Retiros", "Depósitos en efectivo", "Consultas"]
+  },
+  {
+    "id": "of-5",
+    "nombre": "Sucursal Bogotá Financiera Calle 72",
+    "tipo": "sucursal",
+    "ciudad": "Bogotá D.C.",
+    "departamento": "Cundinamarca",
+    "direccion": "Calle 72 # 10-34, Zona Financiera",
+    "telefono": "(601) 745 8000",
+    "horario": "Lunes a Viernes: 9:00 AM - 4:00 PM | Sábados: 9:00 AM - 1:00 PM",
+    "servicios": ["Banca Preferencial", "Asesoría de Crédito y CDT", "Cajas Especiales", "Banca Corporativa"]
+  },
+  {
+    "id": "of-6",
+    "nombre": "Cajero Automático Terminal de Transportes La Dorada",
+    "tipo": "cajero",
+    "ciudad": "La Dorada",
+    "departamento": "Caldas",
+    "direccion": "Calle 10 # 8-40, Sala de Espera",
+    "telefono": "Línea Nacional 01 8000 912 345",
+    "horario": "24 Horas / 7 Días",
+    "servicios": ["Retiros de efectivo", "Consultas de saldo", "Cambio de clave"]
+  },
+  {
+    "id": "of-7",
+    "nombre": "Sucursal Medellín El Poblado",
+    "tipo": "sucursal",
+    "ciudad": "Medellín",
+    "departamento": "Antioquia",
+    "direccion": "Carrera 43A # 1-50, San Fernando Plaza",
+    "telefono": "(604) 448 9020",
+    "horario": "Lunes a Viernes: 8:30 AM - 4:30 PM",
+    "servicios": ["Asesoría Integral", "Créditos", "Inversiones CDT", "Cajero Automático 24H"]
+  },
+  {
+    "id": "of-8",
+    "nombre": "Cajero Automático Pereira Unicentro",
+    "tipo": "cajero",
+    "ciudad": "Pereira",
+    "departamento": "Risaralda",
+    "direccion": "Av. 30 de Agosto # 75-51, Entrada 2",
+    "telefono": "Línea Nacional 01 8000 912 345",
+    "horario": "Lunes a Domingo: 7:00 AM - 10:00 PM",
+    "servicios": ["Retiros", "Consultas", "Pagos de servicios"]
+  }
+]
