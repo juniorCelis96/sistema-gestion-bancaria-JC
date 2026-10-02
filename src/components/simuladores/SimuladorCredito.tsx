@@ -14,12 +14,13 @@ import {
   FileText, 
   Share2,
   RefreshCw,
-  Table
+  Table,
+  X
 } from 'lucide-react';
 import { calcularCredito, formatCOP, ResultadoCredito } from '@/lib/financial-math';
 import { TasasConfig, CreditoTasaConfig } from '@/types';
 
-export default function SimuladorCreditoPage() {
+export default function SimuladorCredito() {
   const [tasasConfig, setTasasConfig] = useState<TasasConfig | null>(null);
   const [tipoCredito, setTipoCredito] = useState<string>('libre_inversion');
   const [monto, setMonto] = useState<number>(15000000);
@@ -64,6 +65,19 @@ export default function SimuladorCreditoPage() {
     }
   };
 
+  useEffect(() => {
+    if (!verAmortizacion) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setVerAmortizacion(false);
+    };
+    document.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [verAmortizacion]);
+
   // Recalcular crédito cada vez que cambien los parámetros
   useEffect(() => {
     if (monto > 0 && plazoMeses > 0 && tasaMensual >= 0) {
@@ -72,42 +86,16 @@ export default function SimuladorCreditoPage() {
     }
   }, [monto, plazoMeses, tasaMensual]);
 
-  const handleGuardarSimulacion = async (e: React.FormEvent) => {
+  const handleGuardarSimulacion = (e: React.FormEvent) => {
     e.preventDefault();
     if (!resultado || !clienteNombre) return;
 
-    try {
-      const resp = await fetch('/api/simulaciones', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tipo: 'credito',
-          clienteNombre,
-          clienteEmail: clienteEmail || 'N/A',
-          clienteIdentificacion: 'Sin documento',
-          creadoPor: 'Cliente / Simulador Web',
-          detalles: {
-            tipoCredito,
-            monto: resultado.monto,
-            plazoMeses: resultado.plazoMeses,
-            tasaNominalMensual: resultado.tasaNominalMensual,
-            cuotaMensual: resultado.cuotaMensual,
-            totalPagar: resultado.totalPagar,
-            totalIntereses: resultado.totalIntereses,
-          },
-        }),
-      });
-
-      if (resp.ok) {
-        setGuardadoExito(true);
-        setTimeout(() => {
-          setGuardadoExito(false);
-          setMostrarModalGuardar(false);
-        }, 2000);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    // Sitio demo: el registro es simulado, no se guarda en base de datos ni se envía correo.
+    setGuardadoExito(true);
+    setTimeout(() => {
+      setGuardadoExito(false);
+      setMostrarModalGuardar(false);
+    }, 2500);
   };
 
   const creditoActual = tasasConfig?.creditos.find((c) => c.tipo === tipoCredito);
@@ -117,12 +105,12 @@ export default function SimuladorCreditoPage() {
       
       {/* Encabezado */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3.5 py-1.5 rounded-full">
+        <span className="text-xs font-bold uppercase tracking-wider text-brand-800 bg-brand-100 px-3.5 py-1.5 rounded-full">
           Herramienta Financiera Oficial
         </span>
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+        <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">
           Simulador de Crédito
-        </h1>
+        </h2>
         <p className="text-base text-slate-600">
           Proyecta tus cuotas mensuales mediante el sistema de amortización francés con tasa fija. Sin costos ocultos.
         </p>
@@ -130,7 +118,7 @@ export default function SimuladorCreditoPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        {/* FORMULARIO DE PARÁMETROS (Puntos requeridos en EV9) */}
+        {/* FORMULARIO DE PARÁMETROS*/}
         <div className="lg:col-span-5 bg-white p-7 sm:p-8 rounded-3xl border border-slate-200 shadow-xs space-y-6">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">
             <h2 className="text-lg font-bold text-slate-900">Parámetros del Crédito</h2>
@@ -146,7 +134,7 @@ export default function SimuladorCreditoPage() {
               <select
                 value={tipoCredito}
                 onChange={handleCambioTipo}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
               >
                 <option value="libre_inversion">Crédito de Libre Inversión</option>
                 <option value="vivienda">Crédito Hipotecario / Vivienda</option>
@@ -161,7 +149,7 @@ export default function SimuladorCreditoPage() {
                 <label className="text-xs font-bold uppercase text-slate-700">
                   Valor Solicitado
                 </label>
-                <span className="text-xs font-bold text-blue-700">{formatCOP(monto)}</span>
+                <span className="text-xs font-bold text-brand-700">{formatCOP(monto)}</span>
               </div>
               <div className="relative">
                 <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400 font-semibold">
@@ -174,7 +162,7 @@ export default function SimuladorCreditoPage() {
                   step={500000}
                   value={monto}
                   onChange={(e) => setMonto(Number(e.target.value))}
-                  className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                  className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                 />
               </div>
               <input
@@ -184,7 +172,7 @@ export default function SimuladorCreditoPage() {
                 step={500000}
                 value={monto}
                 onChange={(e) => setMonto(Number(e.target.value))}
-                className="w-full mt-2.5 accent-blue-600 h-2 bg-slate-200 rounded-lg cursor-pointer"
+                className="w-full mt-2.5 accent-brand-600 h-2 bg-slate-200 rounded-lg cursor-pointer"
               />
               <div className="flex justify-between text-[11px] text-slate-400 mt-1">
                 <span>Mín: {formatCOP(creditoActual?.montoMinimo || 1000000)}</span>
@@ -198,7 +186,7 @@ export default function SimuladorCreditoPage() {
                 <label className="text-xs font-bold uppercase text-slate-700">
                   Plazo de Amortización
                 </label>
-                <span className="text-xs font-bold text-blue-700">{plazoMeses} meses ({(plazoMeses / 12).toFixed(1)} años)</span>
+                <span className="text-xs font-bold text-brand-700">{plazoMeses} meses ({(plazoMeses / 12).toFixed(1)} años)</span>
               </div>
               <input
                 type="number"
@@ -206,7 +194,7 @@ export default function SimuladorCreditoPage() {
                 max={creditoActual?.plazoMaximoMeses || 120}
                 value={plazoMeses}
                 onChange={(e) => setPlazoMeses(Number(e.target.value))}
-                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
               />
               <input
                 type="range"
@@ -215,7 +203,7 @@ export default function SimuladorCreditoPage() {
                 step={6}
                 value={plazoMeses}
                 onChange={(e) => setPlazoMeses(Number(e.target.value))}
-                className="w-full mt-2.5 accent-blue-600 h-2 bg-slate-200 rounded-lg cursor-pointer"
+                className="w-full mt-2.5 accent-brand-600 h-2 bg-slate-200 rounded-lg cursor-pointer"
               />
               <div className="flex justify-between text-[11px] text-slate-400 mt-1">
                 <span>{creditoActual?.plazoMinimoMeses || 12} meses</span>
@@ -241,7 +229,7 @@ export default function SimuladorCreditoPage() {
                   max="4.0"
                   value={tasaMensual}
                   onChange={(e) => setTasaMensual(Number(e.target.value))}
-                  className="w-full pr-9 pl-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-all"
+                  className="w-full pr-9 pl-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent transition-all"
                 />
                 <span className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-slate-400 font-semibold">
                   %
@@ -256,9 +244,9 @@ export default function SimuladorCreditoPage() {
           <div className="pt-2">
             <button
               onClick={() => setMostrarModalGuardar(true)}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all shadow-sm"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-navy-900 hover:bg-brand-800 text-white font-semibold text-sm transition-all shadow-sm"
             >
-              <Save className="w-4 h-4 text-emerald-400" />
+              <Save className="w-4 h-4 text-brand-400" />
               <span>Guardar o Enviar Simulación</span>
             </button>
           </div>
@@ -272,27 +260,27 @@ export default function SimuladorCreditoPage() {
               
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 pb-5 border-b border-slate-100">
                 <div>
-                  <span className="text-xs font-bold text-blue-700 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-brand-700 uppercase tracking-wider">
                     Resultado Estimado de tu Crédito
                   </span>
                   <h3 className="text-2xl font-black text-slate-900 mt-0.5">
                     Plan de Pagos Calculado
                   </h3>
                 </div>
-                <div className="text-xs px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-bold border border-emerald-200">
+                <div className="text-xs px-3 py-1 rounded-full bg-brand-50 text-brand-700 font-bold border border-brand-200">
                   Cuota Fija Mensual
                 </div>
               </div>
 
               {/* Tarjeta Destacada de Cuota Mensual */}
-              <div className="bg-gradient-to-br from-blue-900 via-blue-800 to-navy-900 text-white rounded-2xl p-6 sm:p-8 shadow-md">
-                <div className="text-xs font-semibold text-blue-200 uppercase tracking-wider">
+              <div className="bg-gradient-to-br from-brand-700 via-brand-800 to-navy-900 text-white rounded-2xl p-6 sm:p-8 shadow-md">
+                <div className="text-xs font-semibold text-brand-200 uppercase tracking-wider">
                   Valor Aproximado de tu Cuota Mensual
                 </div>
                 <div className="text-4xl sm:text-5xl font-black tracking-tight text-white mt-2">
                   {formatCOP(resultado.cuotaMensual)}
                 </div>
-                <p className="text-xs text-blue-200/90 mt-2 font-normal">
+                <p className="text-xs text-brand-200/90 mt-2 font-normal">
                   * Cuota fija calculada para un monto de {formatCOP(resultado.monto)} a un plazo de {resultado.plazoMeses} meses.
                 </p>
               </div>
@@ -311,67 +299,28 @@ export default function SimuladorCreditoPage() {
 
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
                   <div className="text-xs text-slate-500 font-medium">Total a Pagar</div>
-                  <div className="text-lg font-bold text-blue-900 mt-1">{formatCOP(resultado.totalPagar)}</div>
+                  <div className="text-lg font-bold text-brand-900 mt-1">{formatCOP(resultado.totalPagar)}</div>
                 </div>
               </div>
 
               {/* Botón para ver tabla de amortización */}
               <div className="flex flex-col sm:flex-row gap-3 pt-2">
                 <button
-                  onClick={() => setVerAmortizacion(!verAmortizacion)}
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-blue-600 text-blue-700 hover:bg-blue-50 font-semibold text-sm transition-all"
+                  onClick={() => setVerAmortizacion(true)}
+                  className="flex-1 inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl border-2 border-brand-500 text-brand-700 hover:bg-brand-100 font-semibold text-sm transition-all"
                 >
                   <Table className="w-4 h-4" />
-                  <span>{verAmortizacion ? 'Ocultar Tabla de Amortización' : 'Ver Tabla de Amortización Cuota a Cuota'}</span>
+                  <span>Ver Tabla de Amortización Cuota a Cuota</span>
                 </button>
 
                 <Link
-                  href={`/contacto?asunto=Solicitud-Credito-${encodeURIComponent(tipoCredito)}`}
-                  className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-all shadow-sm"
+                  href="/#contacto"
+                  className="inline-flex items-center justify-center gap-2 py-3 px-6 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-all shadow-sm"
                 >
                   <span>Solicitar con Asesor</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
-
-              {/* TABLA DE AMORTIZACIÓN DETALLADA */}
-              {verAmortizacion && (
-                <div className="pt-4 border-t border-slate-100 animate-in fade-in duration-300">
-                  <div className="flex justify-between items-center mb-3">
-                    <h4 className="text-sm font-bold text-slate-900">
-                      Tabla de Amortización (Sistema Francés)
-                    </h4>
-                    <span className="text-xs text-slate-500">
-                      Total: {resultado.tablaAmortizacion.length} cuotas
-                    </span>
-                  </div>
-
-                  <div className="overflow-x-auto max-h-96 rounded-xl border border-slate-200">
-                    <table className="w-full text-xs text-left">
-                      <thead className="bg-slate-100 text-slate-700 font-bold uppercase sticky top-0">
-                        <tr>
-                          <th className="py-2.5 px-3">Mes</th>
-                          <th className="py-2.5 px-3">Cuota Fija</th>
-                          <th className="py-2.5 px-3">Abono Capital</th>
-                          <th className="py-2.5 px-3">Interés</th>
-                          <th className="py-2.5 px-3">Saldo Restante</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100 bg-white">
-                        {resultado.tablaAmortizacion.map((fila) => (
-                          <tr key={fila.mes} className="hover:bg-slate-50 transition-colors">
-                            <td className="py-2 px-3 font-semibold text-slate-900">{fila.mes}</td>
-                            <td className="py-2 px-3 font-medium text-slate-800">{formatCOP(fila.cuota)}</td>
-                            <td className="py-2 px-3 text-emerald-600 font-medium">{formatCOP(fila.abonoCapital)}</td>
-                            <td className="py-2 px-3 text-amber-600">{formatCOP(fila.interes)}</td>
-                            <td className="py-2 px-3 font-medium text-slate-700">{formatCOP(fila.saldoRestante)}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              )}
 
             </div>
           )}
@@ -379,6 +328,89 @@ export default function SimuladorCreditoPage() {
         </div>
 
       </div>
+
+      {/* MODAL TABLA DE AMORTIZACIÓN */}
+      {verAmortizacion && resultado && (
+        <div
+          className="fixed inset-0 z-50 bg-navy-950/60 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={() => setVerAmortizacion(false)}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="titulo-amortizacion"
+            className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="bg-gradient-to-r from-brand-700 via-brand-600 to-brand-500 text-white px-6 sm:px-8 py-5 flex justify-between items-start gap-4">
+              <div>
+                <h3 id="titulo-amortizacion" className="text-lg sm:text-xl font-bold">
+                  Tabla de Amortización (Sistema Francés)
+                </h3>
+                <p className="text-xs text-brand-100 mt-1">
+                  {formatCOP(resultado.monto)} a {resultado.plazoMeses} meses • Tasa {resultado.tasaNominalMensual}% M.V. • {resultado.tablaAmortizacion.length} cuotas
+                </p>
+              </div>
+              <button
+                onClick={() => setVerAmortizacion(false)}
+                aria-label="Cerrar tabla de amortización"
+                className="p-1.5 rounded-lg text-white/80 hover:text-white hover:bg-white/15 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 px-6 sm:px-8 py-4 bg-brand-50 border-b border-brand-100 text-xs">
+              <div>
+                <div className="text-slate-500 font-medium">Cuota fija</div>
+                <div className="text-base font-bold text-brand-800">{formatCOP(resultado.cuotaMensual)}</div>
+              </div>
+              <div>
+                <div className="text-slate-500 font-medium">Total intereses</div>
+                <div className="text-base font-bold text-amber-600">{formatCOP(resultado.totalIntereses)}</div>
+              </div>
+              <div>
+                <div className="text-slate-500 font-medium">Total a pagar</div>
+                <div className="text-base font-bold text-navy-900">{formatCOP(resultado.totalPagar)}</div>
+              </div>
+            </div>
+
+            <div className="overflow-auto flex-1">
+              <table className="w-full text-xs sm:text-sm text-left">
+                <thead className="bg-navy-900 text-white font-semibold uppercase text-[11px] tracking-wide sticky top-0">
+                  <tr>
+                    <th className="py-3 px-4">Mes</th>
+                    <th className="py-3 px-4">Cuota Fija</th>
+                    <th className="py-3 px-4">Abono Capital</th>
+                    <th className="py-3 px-4">Interés</th>
+                    <th className="py-3 px-4">Saldo Restante</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {resultado.tablaAmortizacion.map((fila) => (
+                    <tr key={fila.mes} className="odd:bg-white even:bg-brand-50/60 hover:bg-brand-100/70 transition-colors">
+                      <td className="py-2.5 px-4 font-semibold text-slate-900">{fila.mes}</td>
+                      <td className="py-2.5 px-4 font-medium text-slate-800">{formatCOP(fila.cuota)}</td>
+                      <td className="py-2.5 px-4 text-brand-600 font-semibold">{formatCOP(fila.abonoCapital)}</td>
+                      <td className="py-2.5 px-4 text-amber-600">{formatCOP(fila.interes)}</td>
+                      <td className="py-2.5 px-4 font-medium text-slate-700">{formatCOP(fila.saldoRestante)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="px-6 sm:px-8 py-4 border-t border-slate-100 flex justify-end">
+              <button
+                onClick={() => setVerAmortizacion(false)}
+                className="px-5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold transition-colors"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* MODAL PARA GUARDAR SIMULACIÓN */}
       {mostrarModalGuardar && (
@@ -398,10 +430,11 @@ export default function SimuladorCreditoPage() {
             </div>
 
             {guardadoExito ? (
-              <div className="p-4 rounded-xl bg-emerald-50 text-emerald-800 text-center space-y-2">
-                <CheckCircle2 className="w-8 h-8 text-emerald-600 mx-auto" />
-                <p className="text-sm font-bold">¡Simulación guardada exitosamente!</p>
-                <p className="text-xs">Un asesor financiero podrá consultar tu cotización con tu nombre.</p>
+              <div className="p-4 rounded-xl bg-brand-50 text-brand-800 text-center space-y-2">
+                <CheckCircle2 className="w-8 h-8 text-brand-600 mx-auto" />
+                <p className="text-sm font-bold">¡Simulación registrada exitosamente!</p>
+                <p className="text-xs">Un asesor financiero de SENA FINANZAS se comunicará contigo.</p>
+                <p className="text-[11px] opacity-80">Sitio de demostración: tus datos no se almacenan ni se envían.</p>
               </div>
             ) : (
               <form onSubmit={handleGuardarSimulacion} className="space-y-4">
@@ -415,7 +448,7 @@ export default function SimuladorCreditoPage() {
                     value={clienteNombre}
                     onChange={(e) => setClienteNombre(e.target.value)}
                     placeholder="Ej. Juan Pérez"
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600"
                   />
                 </div>
 
@@ -428,7 +461,7 @@ export default function SimuladorCreditoPage() {
                     value={clienteEmail}
                     onChange={(e) => setClienteEmail(e.target.value)}
                     placeholder="juan.perez@correo.com"
-                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                    className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600"
                   />
                 </div>
 
@@ -439,7 +472,7 @@ export default function SimuladorCreditoPage() {
                   </div>
                   <div className="flex justify-between">
                     <span>Cuota mensual estimada:</span>
-                    <strong className="text-emerald-700">{formatCOP(resultado?.cuotaMensual || 0)}</strong>
+                    <strong className="text-brand-700">{formatCOP(resultado?.cuotaMensual || 0)}</strong>
                   </div>
                 </div>
 
@@ -453,7 +486,7 @@ export default function SimuladorCreditoPage() {
                   </button>
                   <button
                     type="submit"
-                    className="flex-1 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white text-sm font-semibold shadow-sm"
+                    className="flex-1 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-sm font-semibold shadow-sm"
                   >
                     Guardar
                   </button>

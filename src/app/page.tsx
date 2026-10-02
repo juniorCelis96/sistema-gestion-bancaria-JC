@@ -1,104 +1,125 @@
 import React from 'react';
 import Link from 'next/link';
-import { 
-  Building2, 
-  Calculator, 
-  PiggyBank, 
-  ShieldCheck, 
-  TrendingUp, 
-  ArrowRight, 
-  CheckCircle2, 
-  MapPin, 
-  PhoneCall, 
-  Users, 
-  Clock, 
-  Award,
-  Sparkles
+import {
+  Calculator,
+  PiggyBank,
+  ArrowRight,
+  Sparkles,
+  BookOpen,
+  Target,
+  Compass,
+  Eye,
+  HeartHandshake,
+  ShieldCheck,
+  Lightbulb,
+  Users,
+  GraduationCap,
+  Wallet,
+  Scale,
 } from 'lucide-react';
-import { getProductos } from '@/lib/db';
 import { formatCOP } from '@/lib/financial-math';
+import { Section } from '@/components/ui/content';
+import ContactoSection from '@/components/home/ContactoSection';
 
-export default async function HomePage() {
-  const productos = await getProductos();
-  const productosDestacados = productos.filter((p) => p.destacado);
+const OBJETIVOS_ESPECIFICOS = [
+  {
+    icono: BookOpen,
+    titulo: 'Comprender',
+    texto:
+      'Identificar y comprender los principales conceptos relacionados con la educación financiera, reconociendo su importancia para el manejo adecuado del dinero y la toma de decisiones en diferentes situaciones de la vida cotidiana.',
+  },
+  {
+    icono: Wallet,
+    titulo: 'Organizar y ahorrar',
+    texto:
+      'Fomentar hábitos financieros responsables mediante la organización de los ingresos y gastos, la elaboración de presupuestos y la práctica del ahorro, con el fin de utilizar los recursos económicos de manera planificada y consciente.',
+  },
+  {
+    icono: Scale,
+    titulo: 'Decidir con responsabilidad',
+    texto:
+      'Fortalecer la capacidad para tomar decisiones financieras responsables relacionadas con el crédito, el endeudamiento, la inversión y el cumplimiento de metas, teniendo en cuenta las necesidades, posibilidades y consecuencias de cada decisión.',
+  },
+];
 
+const VALORES = [
+  { icono: ShieldCheck, label: 'Confianza' },
+  { icono: Scale, label: 'Transparencia' },
+  { icono: HeartHandshake, label: 'Responsabilidad' },
+  { icono: Lightbulb, label: 'Innovación' },
+];
+
+export default function HomePage() {
   return (
-    <div className="space-y-16 pb-20">
-      
-      {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-navy-950 via-blue-950 to-slate-900 text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8 border-b border-blue-900/40">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-700/20 via-transparent to-transparent pointer-events-none" />
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-        
+    <div>
+      {/* HERO */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-navy-900 via-brand-800 to-brand-600 text-white pt-16 pb-24 px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-400/25 via-transparent to-transparent pointer-events-none" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-brand-300/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-40 -left-32 w-96 h-96 bg-brand-500/25 rounded-full blur-3xl pointer-events-none" />
+
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-300 text-xs font-semibold tracking-wide">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Entidad Financiera Vigilada • Respaldo Fogafín</span>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-400/30 text-brand-300 text-xs font-semibold tracking-wide">
+                <Sparkles className="w-3.5 h-3.5 text-brand-300" />
+                <span>Tu conocimiento, tu mejor inversión</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-                Impulsamos tus metas con <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-emerald-300 to-teal-200">solidez y confianza</span>
+                Aprende a manejar tu dinero y construye un{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-300 via-brand-200 to-brand-100">
+                  mejor futuro
+                </span>
               </h1>
 
-              <p className="text-lg sm:text-xl text-slate-300 max-w-2xl font-normal leading-relaxed">
-                Descubre nuestra oferta de productos financieros, simula tu crédito a cuotas fijas o calcula la rentabilidad de tu CDT con tasas preferenciales y respuesta inmediata.
+              <p className="text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                Conocimientos y herramientas sencillas para organizar tus ingresos y gastos, ahorrar, usar el crédito de manera responsable y tomar mejores decisiones financieras.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4">
                 <Link
-                  href="/simulador-credito"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-base shadow-lg shadow-emerald-600/30 hover:scale-[1.02] transition-all"
+                  href="/educacion-financiera"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand-300 hover:bg-brand-200 text-navy-900 font-bold text-base shadow-lg shadow-brand-300/30 hover:scale-[1.02] transition-all"
                 >
-                  <Calculator className="w-5 h-5" />
-                  <span>Simular Crédito</span>
+                  <GraduationCap className="w-5 h-5" />
+                  <span>Empezar a aprender</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-
                 <Link
-                  href="/simulador-cdt"
+                  href="/simuladores"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold text-base backdrop-blur-sm transition-all"
                 >
-                  <PiggyBank className="w-5 h-5 text-emerald-400" />
-                  <span>Invertir en CDT</span>
-                </Link>
-
-                <Link
-                  href="/productos"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-slate-300 hover:text-white font-medium text-sm transition-colors"
-                >
-                  <span>Ver Todos los Productos</span>
+                  <Calculator className="w-5 h-5 text-brand-300" />
+                  <span>Ir a simuladores</span>
                 </Link>
               </div>
 
-              {/* Badges de confianza */}
-              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 text-left">
+              <div className="grid grid-cols-3 gap-4 pt-8 border-t border-white/10 text-left">
                 <div>
-                  <div className="text-2xl font-bold text-white">11.80%</div>
-                  <div className="text-xs text-slate-400">Tasa E.A. Máxima CDT</div>
+                  <div className="text-2xl font-bold text-white">7</div>
+                  <div className="text-xs text-slate-300">Módulos de aprendizaje</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-white">0.95%</div>
-                  <div className="text-xs text-slate-400">Tasa M.V. Hipotecario</div>
+                  <div className="text-2xl font-bold text-white">3</div>
+                  <div className="text-xs text-slate-300">Simuladores financieros</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-emerald-400">100%</div>
-                  <div className="text-xs text-slate-400">Digital y Seguro</div>
+                  <div className="text-2xl font-bold text-brand-300">100%</div>
+                  <div className="text-xs text-slate-300">Práctico y gratuito</div>
                 </div>
               </div>
             </div>
 
-            {/* Banner Quick Sim Box */}
+            {/* Simulador exprés */}
             <div className="lg:col-span-5">
-              <div className="bg-white/95 text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-blue-950/40 border border-slate-200">
+              <div className="bg-white/95 text-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-navy-950/40 border border-slate-200">
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900">Simulador Exprés</h3>
+                    <h2 className="text-lg font-bold text-slate-900">Simulador Exprés</h2>
                     <p className="text-xs text-slate-500">Calcula tu crédito en segundos</p>
                   </div>
-                  <span className="p-2.5 rounded-xl bg-blue-50 text-blue-700">
+                  <span className="p-2.5 rounded-xl bg-brand-100 text-brand-700">
                     <Calculator className="w-5 h-5" />
                   </span>
                 </div>
@@ -106,251 +127,158 @@ export default async function HomePage() {
                 <div className="space-y-4 my-6">
                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
                     <div className="text-xs font-semibold uppercase text-slate-500 tracking-wider">Ejemplo Crédito Libre Inversión</div>
-                    <div className="text-2xl font-extrabold text-blue-900 mt-1">{formatCOP(10000000)}</div>
+                    <div className="text-2xl font-extrabold text-brand-900 mt-1">{formatCOP(10000000)}</div>
                     <div className="flex justify-between items-center text-xs text-slate-600 mt-2">
                       <span>Plazo: <strong>36 meses</strong></span>
                       <span>Tasa: <strong>1.45% M.V.</strong></span>
                     </div>
                   </div>
 
-                  <div className="bg-emerald-50/80 p-4 rounded-xl border border-emerald-200/80">
+                  <div className="bg-brand-100/70 p-4 rounded-xl border border-brand-300/60">
                     <div className="flex justify-between items-center">
-                      <span className="text-xs font-semibold text-emerald-800 uppercase">Cuota Mensual Estimada</span>
-                      <span className="text-xs font-bold bg-emerald-200 text-emerald-900 px-2 py-0.5 rounded-full">Fija</span>
+                      <span className="text-xs font-semibold text-brand-800 uppercase">Cuota Mensual Estimada</span>
+                      <span className="text-xs font-bold bg-brand-200 text-brand-900 px-2 py-0.5 rounded-full">Fija</span>
                     </div>
-                    <div className="text-3xl font-black text-emerald-700 mt-1">
+                    <div className="text-3xl font-black text-brand-700 mt-1">
                       {formatCOP(359770)} <span className="text-xs font-normal text-slate-500">/ mes</span>
                     </div>
-                    <p className="text-[11px] text-emerald-800/80 mt-1">
-                      Incluye capital e intereses. Sin cobro de estudio de crédito.
-                    </p>
+                    <p className="text-[11px] text-brand-800/80 mt-1">Incluye capital e intereses. Valor aproximado.</p>
                   </div>
                 </div>
 
-                <Link
-                  href="/simulador-credito"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm transition-all shadow-md"
-                >
-                  <span>Personalizar mi simulación</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* INFORMACIÓN INSTITUCIONAL Y MISIÓN (PUNTO REQUERIDO POR EV9) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-slate-200">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-5 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3 py-1 rounded-full">
-                Nuestra Identidad Institucional
-              </span>
-              <h2 className="text-3xl font-extrabold text-slate-900">
-                Comprometidos con el desarrollo financiero de nuestra comunidad
-              </h2>
-              <p className="text-slate-600 text-base leading-relaxed">
-                Nuestra misión es ofrecer productos y servicios financieros accesibles, transparentes y éticos que generen progreso económico tanto para las familias como para las empresas de la región.
-              </p>
-              <div className="pt-2">
-                <Link
-                  href="/contacto"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
-                >
-                  <span>Conoce nuestros canales de atención</span>
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-blue-300 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-3">
-                  <ShieldCheck className="w-5 h-5" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <Link
+                    href="/simuladores#simulador-credito"
+                    className="inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-semibold text-sm transition-all shadow-md"
+                  >
+                    <span>Simular crédito</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link
+                    href="/simuladores#simulador-cdt"
+                    className="inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-all shadow-md"
+                  >
+                    <PiggyBank className="w-4 h-4" />
+                    <span>Simular CDT</span>
+                  </Link>
                 </div>
-                <h3 className="font-bold text-slate-900 text-base mb-1">Seguridad y Respaldo</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Operamos bajo los estándares más estrictos del sistema financiero colombiano con seguro de depósitos Fogafín.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-emerald-300 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
-                  <TrendingUp className="w-5 h-5" />
-                </div>
-                <h3 className="font-bold text-slate-900 text-base mb-1">Rentabilidad Garantizada</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Protegemos el poder adquisitivo de tu dinero ofreciendo tasas de CDT altamente competitivas.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-amber-300 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center mb-3">
-                  <Users className="w-5 h-5" />
-                </div>
-                <h3 className="font-bold text-slate-900 text-base mb-1">Atención Asistida</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Nuestros asesores financieros están capacitados para estructurar el plan que mejor se ajuste a tus ingresos.
-                </p>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-purple-300 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center mb-3">
-                  <Clock className="w-5 h-5" />
-                </div>
-                <h3 className="font-bold text-slate-900 text-base mb-1">Agilidad en Respuestas</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Simulaciones en tiempo real y trámites simplificados sin filas ni esperas innecesarias.
-                </p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PRODUCTOS DESTACADOS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
-              Portafolio Destacado
-            </span>
-            <h2 className="text-3xl font-extrabold text-slate-900 mt-2">
-              Productos diseñados para cada etapa
-            </h2>
-            <p className="text-slate-600 text-sm mt-1">
-              Consulta las características de nuestras cuentas, depósitos e instrumentos de crédito.
+      {/* PRESENTACIÓN */}
+      <Section id="presentacion" eyebrow="Presentación" title="Educación financiera para la vida">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 space-y-4 text-slate-700 leading-relaxed text-base sm:text-lg">
+            <p>
+              La educación financiera nos ayuda a comprender y manejar mejor nuestro dinero. Esta cartilla tiene como propósito brindar conocimientos y herramientas sencillas para aprender a{' '}
+              <strong className="text-brand-700">organizar los ingresos y gastos, ahorrar, utilizar el crédito de manera responsable</strong> y tomar mejores decisiones financieras.
+            </p>
+            <p>
+              A través de ejemplos y actividades prácticas, se busca fortalecer buenos hábitos financieros que contribuyan al cumplimiento de nuestras metas y a un mejor bienestar económico.
             </p>
           </div>
-          <Link
-            href="/productos"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-blue-700 hover:text-blue-800"
-          >
-            <span>Ver catálogo completo ({productos.length})</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {productosDestacados.slice(0, 3).map((prod) => (
-            <div
-              key={prod.id}
-              className="bg-white rounded-2xl p-6 border border-slate-200 shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex justify-between items-start mb-4">
-                  <span className="text-xs font-semibold px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 uppercase">
-                    {prod.categoriaNombre}
-                  </span>
-                  <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">
-                    {prod.tasaReferencial}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">{prod.nombre}</h3>
-                <p className="text-xs text-slate-600 mb-4 line-clamp-3 leading-relaxed">
-                  {prod.descripcion}
-                </p>
-
-                <div className="space-y-2 mb-6">
-                  {prod.caracteristicas.slice(0, 2).map((c, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-slate-600">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{c}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                {prod.categoria === 'creditos' ? (
-                  <Link
-                    href="/simulador-credito"
-                    className="text-xs font-semibold text-blue-700 hover:text-blue-800 flex items-center gap-1"
-                  >
-                    <span>Simular este crédito</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                ) : prod.categoria === 'cdt' ? (
-                  <Link
-                    href="/simulador-cdt"
-                    className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
-                  >
-                    <span>Calcular CDT</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                ) : (
-                  <Link
-                    href="/productos"
-                    className="text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center gap-1"
-                  >
-                    <span>Ver detalles</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ACCESO RÁPIDO A SIMULADORES Y SUCURSALES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          
-          <div className="bg-gradient-to-br from-blue-900 to-navy-950 text-white p-8 rounded-3xl shadow-md flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center text-blue-300">
-                <Calculator className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl font-bold">Simuladores Financieros</h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
-                Utiliza nuestras herramientas matemáticas de alta precisión para proyectar tus créditos con amortización fija o calcular el rendimiento de tu inversión en CDT antes de solicitarlo.
+          <div className="lg:col-span-5">
+            <div className="relative rounded-3xl bg-gradient-to-br from-brand-500 via-brand-700 to-navy-900 text-white p-8 shadow-xl shadow-brand-900/20 overflow-hidden">
+              <div className="absolute -right-10 -top-10 w-40 h-40 bg-brand-300/30 rounded-full blur-2xl" />
+              <Sparkles className="w-10 h-10 text-brand-200 mb-4" />
+              <p className="text-2xl sm:text-3xl font-extrabold leading-snug relative">
+                ¡Aprende a manejar tu dinero y construye un mejor futuro!
               </p>
-            </div>
-            <div className="flex flex-wrap gap-3 pt-6">
               <Link
-                href="/simulador-credito"
-                className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm transition-all"
+                href="/educacion-financiera"
+                className="relative mt-6 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-300 hover:bg-brand-200 text-navy-900 font-bold text-sm transition-colors"
               >
-                Simulador de Crédito
-              </Link>
-              <Link
-                href="/simulador-cdt"
-                className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm transition-all"
-              >
-                Simulador de CDT
-              </Link>
-            </div>
-          </div>
-
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
-                <MapPin className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl font-bold text-slate-900">Sucursales y Cajeros</h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                Contamos con presencia en Caldas (Sede Principal en La Dorada y Manizales) y principales ciudades del país. Encuentra horarios, ubicación y servicios disponibles.
-              </p>
-            </div>
-            <div className="pt-6">
-              <Link
-                href="/oficinas"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all"
-              >
-                <MapPin className="w-4 h-4 text-emerald-400" />
-                <span>Explorar Red de Atención</span>
+                Explorar la cartilla
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
           </div>
-
         </div>
-      </section>
+      </Section>
 
+      {/* OBJETIVO GENERAL */}
+      <Section id="objetivo-general" eyebrow="Objetivo general" title="¿Qué buscamos?" tone="mint">
+        <div className="relative bg-white rounded-3xl border border-brand-200 p-6 sm:p-10 shadow-sm flex flex-col md:flex-row gap-6 items-start">
+          <span className="w-16 h-16 shrink-0 rounded-2xl bg-brand-500 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
+            <Target className="w-8 h-8" />
+          </span>
+          <p className="text-lg sm:text-xl text-navy-900 leading-relaxed">
+            Promover la educación financiera mediante el desarrollo de conocimientos y hábitos que permitan a las personas{' '}
+            <strong className="text-brand-700">administrar responsablemente sus recursos</strong>, organizar sus ingresos y gastos, fomentar el ahorro y tomar decisiones financieras adecuadas para alcanzar sus metas y mejorar su bienestar económico.
+          </p>
+        </div>
+      </Section>
+
+      {/* OBJETIVOS ESPECÍFICOS */}
+      <Section id="objetivos-especificos" eyebrow="Objetivos específicos" title="Paso a paso hacia el bienestar financiero">
+        <ol className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {OBJETIVOS_ESPECIFICOS.map(({ icono: Icono, titulo, texto }, idx) => (
+            <li
+              key={titulo}
+              className="relative bg-white rounded-3xl border border-slate-200 p-6 hover:shadow-xl hover:shadow-brand-900/10 hover:-translate-y-1 transition-all"
+            >
+              <span className="absolute -top-4 left-6 w-9 h-9 rounded-full bg-navy-900 text-brand-300 font-black flex items-center justify-center shadow-md">
+                {idx + 1}
+              </span>
+              <span
+                className={`mt-3 w-12 h-12 rounded-xl flex items-center justify-center ${
+                  ['bg-brand-100 text-brand-700', 'bg-brand-500 text-white', 'bg-brand-700 text-brand-100'][idx]
+                }`}
+              >
+                <Icono className="w-6 h-6" />
+              </span>
+              <h3 className="mt-4 text-lg font-bold text-navy-900">{titulo}</h3>
+              <p className="mt-2 text-sm text-slate-600 leading-relaxed">{texto}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      {/* MISIÓN Y VISIÓN */}
+      <Section id="mision-vision" eyebrow="Misión y visión" title="Lo que nos mueve" tone="mint">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="rounded-3xl bg-gradient-to-br from-brand-700 via-brand-800 to-navy-900 text-white p-7 sm:p-8 shadow-lg space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="w-12 h-12 rounded-xl bg-brand-300 text-navy-900 flex items-center justify-center">
+                <Compass className="w-6 h-6" />
+              </span>
+              <h3 className="text-2xl font-extrabold">Misión</h3>
+            </div>
+            <p className="text-brand-50/90 leading-relaxed">
+              Promover el bienestar económico de las personas y familias a través de la educación financiera, brindando conocimientos, herramientas prácticas y productos accesibles que les permitan administrar su dinero con responsabilidad, ahorrar con propósito y tomar decisiones informadas.
+            </p>
+          </div>
+          <div className="rounded-3xl bg-white border-2 border-brand-300 p-7 sm:p-8 shadow-sm space-y-4">
+            <div className="flex items-center gap-3">
+              <span className="w-12 h-12 rounded-xl bg-brand-500 text-white flex items-center justify-center">
+                <Eye className="w-6 h-6" />
+              </span>
+              <h3 className="text-2xl font-extrabold text-navy-900">Visión</h3>
+            </div>
+            <p className="text-slate-700 leading-relaxed">
+              Para el año 2030, ser reconocidos como la entidad financiera referente en educación financiera en Colombia, por transformar el conocimiento de nuestros clientes en mejores decisiones y en un futuro económico más estable para sus comunidades.
+            </p>
+          </div>
+        </div>
+        <ul className="flex flex-wrap justify-center gap-3">
+          {VALORES.map(({ icono: Icono, label }) => (
+            <li key={label} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-brand-200 text-sm font-semibold text-brand-800 shadow-xs">
+              <Icono className="w-4 h-4 text-brand-500" />
+              {label}
+            </li>
+          ))}
+          <li className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-brand-200 text-sm font-semibold text-brand-800 shadow-xs">
+            <Users className="w-4 h-4 text-brand-500" />
+            Compromiso social
+          </li>
+        </ul>
+      </Section>
+
+      {/* CONTACTO */}
+      <ContactoSection />
     </div>
   );
 }

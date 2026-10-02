@@ -22,14 +22,8 @@ export default function ProductosPage() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch('/data/productos.json')
-      .then((res) => {
-        if (!res.ok) {
-          // Si no está en public, intentamos desde API o endpoint
-          return fetch('/api/productos');
-        }
-        return res.json();
-      })
+    fetch('/api/productos')
+      .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
           setProductos(data);
@@ -56,7 +50,7 @@ export default function ProductosPage() {
       
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3.5 py-1.5 rounded-full">
+        <span className="text-xs font-bold uppercase tracking-wider text-brand-800 bg-brand-100 px-3.5 py-1.5 rounded-full">
           Portafolio Financiero Institucional
         </span>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -78,7 +72,7 @@ export default function ProductosPage() {
               onClick={() => setCategoriaSeleccionada(cat.id)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                 isActive
-                  ? 'bg-blue-700 text-white shadow-sm shadow-blue-700/20'
+                  ? 'bg-brand-700 text-white shadow-sm shadow-brand-700/20'
                   : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
               }`}
             >
@@ -106,14 +100,14 @@ export default function ProductosPage() {
                     {prod.categoriaNombre}
                   </span>
                   <div className="text-right">
-                    <span className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-md">
+                    <span className="text-xs font-bold text-brand-800 bg-brand-100 border border-brand-200 px-2.5 py-1 rounded-md">
                       {prod.tasaReferencial}
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-700 transition-colors">
+                  <h3 className="text-xl font-bold text-slate-900 group-hover:text-brand-700 transition-colors">
                     {prod.nombre}
                   </h3>
                   <p className="text-xs text-slate-600 mt-2 leading-relaxed">
@@ -126,7 +120,7 @@ export default function ProductosPage() {
                   <div className="text-xs font-bold uppercase text-slate-500 tracking-wider">Beneficios Principales</div>
                   {prod.caracteristicas.map((caract, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-slate-700">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-brand-600 shrink-0 mt-0.5" />
                       <span>{caract}</span>
                     </div>
                   ))}
@@ -137,7 +131,7 @@ export default function ProductosPage() {
                   <div className="text-xs font-bold uppercase text-slate-500 tracking-wider">Requisitos Básicos</div>
                   {prod.requisitos.map((req, i) => (
                     <div key={i} className="flex items-start gap-2 text-xs text-slate-600">
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0 mt-1.5" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0 mt-1.5" />
                       <span>{req}</span>
                     </div>
                   ))}
@@ -148,8 +142,8 @@ export default function ProductosPage() {
               <div className="p-6 bg-slate-50 border-t border-slate-100">
                 {prod.categoria === 'creditos' ? (
                   <Link
-                    href={`/simulador-credito`}
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-semibold text-sm transition-all shadow-sm"
+                    href="/simuladores#simulador-credito"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-semibold text-sm transition-all shadow-sm"
                   >
                     <Calculator className="w-4 h-4" />
                     <span>Simular este Crédito</span>
@@ -157,8 +151,8 @@ export default function ProductosPage() {
                   </Link>
                 ) : prod.categoria === 'cdt' ? (
                   <Link
-                    href={`/simulador-cdt`}
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm transition-all shadow-sm"
+                    href="/simuladores#simulador-cdt"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm transition-all shadow-sm"
                   >
                     <PiggyBank className="w-4 h-4" />
                     <span>Calcular Rentabilidad CDT</span>
@@ -166,8 +160,8 @@ export default function ProductosPage() {
                   </Link>
                 ) : (
                   <Link
-                    href={`/contacto?asunto=Informacion-${encodeURIComponent(prod.nombre)}`}
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all shadow-sm"
+                    href="/#contacto"
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-navy-900 hover:bg-brand-800 text-white font-semibold text-sm transition-all shadow-sm"
                   >
                     <span>Solicitar Información</span>
                     <ArrowRight className="w-4 h-4" />
@@ -180,8 +174,8 @@ export default function ProductosPage() {
       )}
 
       {/* Nota legal Fogafin */}
-      <div className="p-6 bg-blue-50/70 border border-blue-200/80 rounded-2xl flex items-center gap-4 text-xs text-blue-900">
-        <Info className="w-6 h-6 text-blue-700 shrink-0" />
+      <div className="p-6 bg-brand-50/70 border border-brand-200/80 rounded-2xl flex items-center gap-4 text-xs text-brand-900">
+        <Info className="w-6 h-6 text-brand-700 shrink-0" />
         <p>
           Las tasas y condiciones de los productos financieros son de carácter informativo y pueden variar conforme a las políticas vigentes de la entidad y la evaluación de riesgo crediticio particular. Los depósitos en cuenta de ahorros y CDT están amparados por el seguro de depósitos Fogafín.
         </p>

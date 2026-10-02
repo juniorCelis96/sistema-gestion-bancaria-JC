@@ -64,7 +64,7 @@ export default function FAQPage() {
       
       {/* Encabezado */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3.5 py-1.5 rounded-full">
+        <span className="text-xs font-bold uppercase tracking-wider text-brand-800 bg-brand-100 px-3.5 py-1.5 rounded-full">
           Centro de Ayuda y Soporte
         </span>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -83,7 +83,7 @@ export default function FAQPage() {
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
           placeholder="¿Qué inquietud deseas resolver? Ej. amortización, Fogafín, retención..."
-          className="w-full pl-12 pr-4 py-3 bg-white border border-slate-300 rounded-2xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 shadow-xs transition-all"
+          className="w-full pl-12 pr-4 py-3 bg-white border border-slate-300 rounded-2xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 shadow-xs transition-all"
         />
       </div>
 
@@ -95,7 +95,7 @@ export default function FAQPage() {
             onClick={() => setCategoria(cat.id)}
             className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
               categoria === cat.id
-                ? 'bg-blue-700 text-white shadow-xs'
+                ? 'bg-brand-700 text-white shadow-xs'
                 : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
             }`}
           >
@@ -116,8 +116,8 @@ export default function FAQPage() {
           </p>
           <div className="mt-4">
             <Link
-              href="/contacto"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-700 text-white text-xs font-semibold"
+              href="/#contacto"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-700 text-white text-xs font-semibold"
             >
               <span>Ir a Contacto</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -148,8 +148,8 @@ export default function FAQPage() {
                 {isOpen && (
                   <div className="px-5 sm:px-6 pb-6 pt-1 text-slate-600 text-sm leading-relaxed border-t border-slate-100 bg-slate-50/40 animate-in fade-in duration-200">
                     <p>{faq.respuesta}</p>
-                    <div className="mt-3 flex items-center gap-2 text-xs text-blue-700 font-semibold">
-                      <span className="capitalize px-2 py-0.5 rounded bg-blue-100/70">
+                    <div className="mt-3 flex items-center gap-2 text-xs text-brand-700 font-semibold">
+                      <span className="capitalize px-2 py-0.5 rounded bg-brand-100/70">
                         Categoría: {faq.categoria}
                       </span>
                     </div>
@@ -162,7 +162,7 @@ export default function FAQPage() {
       )}
 
       {/* Banner de Contacto adicional */}
-      <div className="bg-gradient-to-r from-blue-900 to-navy-950 text-white p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div className="bg-gradient-to-r from-brand-700 via-brand-800 to-navy-950 text-white p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-6">
         <div className="space-y-1 text-center sm:text-left">
           <h3 className="text-xl font-bold">¿Tienes alguna duda no resuelta?</h3>
           <p className="text-xs text-slate-300">
@@ -170,8 +170,8 @@ export default function FAQPage() {
           </p>
         </div>
         <Link
-          href="/contacto"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-sm transition-all shadow-md shrink-0"
+          href="/#contacto"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold text-sm transition-all shadow-md shrink-0"
         >
           <PhoneCall className="w-4 h-4" />
           <span>Contáctanos Ahora</span>

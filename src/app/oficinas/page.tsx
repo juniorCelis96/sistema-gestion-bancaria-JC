@@ -51,7 +51,7 @@ export default function OficinasPage() {
       
       {/* Encabezado */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-wider text-blue-700 bg-blue-50 px-3.5 py-1.5 rounded-full">
+        <span className="text-xs font-bold uppercase tracking-wider text-brand-800 bg-brand-100 px-3.5 py-1.5 rounded-full">
           Canales de Atención Presencial
         </span>
         <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -74,7 +74,7 @@ export default function OficinasPage() {
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               placeholder="Buscar por nombre, dirección o sector..."
-              className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+              className="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 transition-all"
             />
           </div>
 
@@ -83,7 +83,7 @@ export default function OficinasPage() {
             <select
               value={tipoFiltro}
               onChange={(e) => setTipoFiltro(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 transition-all"
             >
               <option value="todos">Todos los puntos de atención</option>
               <option value="sucursal">Solo Sucursales Bancarias</option>
@@ -96,7 +96,7 @@ export default function OficinasPage() {
             <select
               value={ciudadFiltro}
               onChange={(e) => setCiudadFiltro(e.target.value)}
-              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all"
+              className="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-600 transition-all"
             >
               {ciudades.map((c) => (
                 <option key={c} value={c}>
@@ -117,7 +117,7 @@ export default function OficinasPage() {
                 setTipoFiltro('todos');
                 setCiudadFiltro('todas');
               }}
-              className="text-blue-600 hover:text-blue-800 font-medium"
+              className="text-brand-600 hover:text-brand-800 font-medium"
             >
               Limpiar filtros
             </button>
@@ -149,8 +149,8 @@ export default function OficinasPage() {
                     <span
                       className={`inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${
                         esSucursal
-                          ? 'bg-blue-100 text-blue-800 border border-blue-200'
-                          : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                          ? 'bg-brand-100 text-brand-800 border border-brand-200'
+                          : 'bg-brand-100 text-brand-800 border border-brand-200'
                       }`}
                     >
                       {esSucursal ? <Building2 className="w-3.5 h-3.5" /> : <CreditCard className="w-3.5 h-3.5" />}
@@ -172,7 +172,7 @@ export default function OficinasPage() {
                   {/* Horario */}
                   <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 text-xs text-slate-700 space-y-1">
                     <div className="font-semibold flex items-center gap-1.5 text-slate-900">
-                      <Clock className="w-3.5 h-3.5 text-blue-600" />
+                      <Clock className="w-3.5 h-3.5 text-brand-600" />
                       <span>Horario de Atención:</span>
                     </div>
                     <p className="text-slate-600 leading-relaxed">{of.horario}</p>
@@ -206,7 +206,7 @@ export default function OficinasPage() {
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-xl border border-slate-300 hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors"
                   >
-                    <Navigation className="w-3.5 h-3.5 text-blue-600" />
+                    <Navigation className="w-3.5 h-3.5 text-brand-600" />
                     <span>Cómo Llegar (Google Maps)</span>
                   </a>
                 </div>

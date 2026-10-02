@@ -1,220 +1,259 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { 
-  Building2, 
-  Calculator, 
-  PiggyBank, 
-  MapPin, 
-  HelpCircle, 
-  PhoneCall, 
-  UserCircle, 
-  Menu, 
-  X,
-  CreditCard,
-  ShieldCheck,
-  LogOut
-} from 'lucide-react';
+import { Menu, X, ChevronDown, Calculator, ClipboardList, MapPin, HelpCircle, Briefcase } from 'lucide-react';
+import { NAV_PAGES, sectionHref } from '@/lib/navigation';
+
+const EXTRA_LINKS = [
+  { name: 'Taller de presupuesto', short: 'Taller', href: '/taller-presupuesto', icon: ClipboardList },
+  { name: 'Catálogo de productos', short: 'Catálogo', href: '/productos', icon: Briefcase },
+  { name: 'Oficinas', short: 'Oficinas', href: '/oficinas', icon: MapPin },
+  { name: 'Preguntas frecuentes', short: 'FAQ', href: '/faq', icon: HelpCircle },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<{ nombre: string; rol: string } | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+  const [desktopOpen, setDesktopOpen] = useState<string | null>(null);
+  const desktopNavRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Check if user is logged in via localStorage
-    const saved = localStorage.getItem('banco_user');
-    if (saved) {
-      try {
-        setCurrentUser(JSON.parse(saved));
-      } catch (e) {
-        console.error(e);
-      }
-    }
+    setMobileMenuOpen(false);
+    setDesktopOpen(null);
   }, [pathname]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('banco_user');
-    setCurrentUser(null);
-    window.location.href = '/';
+  useEffect(() => {
+    if (!desktopOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setDesktopOpen(null);
+    const onClick = (e: MouseEvent) => {
+      if (desktopNavRef.current && !desktopNavRef.current.contains(e.target as Node)) setDesktopOpen(null);
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('mousedown', onClick);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('mousedown', onClick);
+    };
+  }, [desktopOpen]);
+
+  const closeAll = () => {
+    setMobileMenuOpen(false);
+    setDesktopOpen(null);
   };
 
-  const navLinks = [
-    { name: 'Inicio', href: '/' },
-    { name: 'Productos', href: '/productos' },
-    { name: 'Simulador Crédito', href: '/simulador-credito' },
-    { name: 'Simulador CDT', href: '/simulador-cdt' },
-    { name: 'Oficinas y Cajeros', href: '/oficinas' },
-    { name: 'Preguntas Frecuentes', href: '/faq' },
-    { name: 'Contacto', href: '/contacto' },
-  ];
-
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
+    <>
       {/* Top Banner Vigilado */}
-      <div className="bg-navy-900 text-slate-300 text-xs py-1.5 px-4">
+      <div className="bg-navy-900 text-slate-300 text-xs py-1.5 px-4 print:hidden">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1">
-          <div className="flex items-center gap-2">
-            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+          <div className="flex items-center gap-2 text-center">
+            <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-brand-500/20 text-brand-300 border border-brand-400/30">
               VIGILADO
             </span>
             <span>Superintendencia Financiera de Colombia • Seguro de Depósitos Fogafín</span>
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
+          <div className="hidden sm:flex items-center gap-4 text-slate-400">
             <span>Línea Gratuita Nacional: 01 8000 912 345</span>
             <span className="hidden md:inline">• La Dorada, Caldas</span>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-900 via-blue-700 to-emerald-500 flex items-center justify-center text-white shadow-md shadow-blue-900/20 group-hover:scale-105 transition-transform">
-              <Building2 className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-1.5">
-                BANCO JC <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-semibold uppercase">Financiera</span>
-              </span>
-              <p className="text-xs text-slate-500 font-medium tracking-wide">Sistema de Gestión Bancaria</p>
-            </div>
-          </Link>
+      {/* Logo row (sticky on mobile / tablet) */}
+      <header className="sticky top-0 xl:static z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm xl:shadow-none print:hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20">
+            <Link href="/" onClick={closeAll} className="flex items-center gap-3 group min-w-0">
+              <Image
+                src="/logo_sena_fin_fondo_blanco.jpeg"
+                alt="SENA FINANZAS S.A."
+                width={56}
+                height={56}
+                priority
+                className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform shrink-0"
+              />
+              <div className="min-w-0">
+                <span className="text-base sm:text-xl font-extrabold tracking-tight text-navy-900 flex items-center gap-1.5">
+                  SENA FINANZAS <span className="text-xs px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 font-semibold">S.A.</span>
+                </span>
+                <p className="text-[11px] sm:text-xs text-slate-500 font-medium italic tracking-wide truncate">Tu conocimiento, tu mejor inversión</p>
+              </div>
+            </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
+            {/* Desktop utility links */}
+            <div className="hidden xl:flex items-center gap-1">
+              {EXTRA_LINKS.map((l) => (
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`px-3.5 py-2 rounded-lg text-sm font-medium transition-all ${
-                    isActive
-                      ? 'text-blue-700 bg-blue-50 font-semibold shadow-xs'
-                      : 'text-slate-600 hover:text-blue-900 hover:bg-slate-100/80'
+                  key={l.href}
+                  href={l.href}
+                  className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    pathname === l.href ? 'text-brand-700 bg-brand-50' : 'text-slate-500 hover:text-brand-800 hover:bg-slate-100'
                   }`}
                 >
-                  {link.name}
+                  <l.icon className="w-4 h-4" />
+                  {l.short}
                 </Link>
-              );
-            })}
-          </nav>
-
-          {/* User Access / Login CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            {currentUser ? (
-              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl">
-                <div className="w-8 h-8 rounded-full bg-blue-700 text-white flex items-center justify-center text-xs font-bold uppercase">
-                  {currentUser.nombre.charAt(0)}
-                </div>
-                <div className="text-left text-xs">
-                  <div className="font-semibold text-slate-900 truncate max-w-[130px]">{currentUser.nombre.split(' ')[0]}</div>
-                  <span className="capitalize text-emerald-600 font-medium text-[11px]">{currentUser.rol}</span>
-                </div>
-                <Link
-                  href={currentUser.rol === 'admin' ? '/dashboard/admin' : '/dashboard/asesor'}
-                  className="ml-2 text-xs bg-blue-600 hover:bg-blue-700 text-white px-2.5 py-1 rounded-md font-medium"
-                >
-                  Panel
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  title="Cerrar sesión"
-                  className="p-1 text-slate-400 hover:text-red-600 rounded transition-colors"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
-              </div>
-            ) : (
+              ))}
               <Link
-                href="/login"
-                className="inline-flex items-center gap-2 bg-navy-900 hover:bg-blue-950 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm hover:shadow transition-all group"
+                href="/simuladores#simulador-credito"
+                className="ml-2 inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold shadow-md shadow-brand-600/20 transition-colors"
               >
-                <UserCircle className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <span>Acceso al Usuario</span>
+                <Calculator className="w-4 h-4" />
+                Simular crédito
               </Link>
-            )}
-          </div>
+            </div>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center gap-2">
+            {/* Mobile menu button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none"
-              aria-label="Abrir menú"
+              type="button"
+              onClick={() => setMobileMenuOpen((v) => !v)}
+              className="xl:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+              aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="menu-movil"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 animate-in slide-in-from-top duration-200">
-          <div className="flex flex-col space-y-1">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <nav
+            id="menu-movil"
+            aria-label="Menú principal"
+            className="xl:hidden border-t border-slate-200 bg-white max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain"
+          >
+            <ul className="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-1">
+              {NAV_PAGES.map((page) => {
+                const isActive = pathname === page.href;
+                const expanded = mobileExpanded === page.href;
+                return (
+                  <li key={page.href} className="rounded-xl overflow-hidden">
+                    <div className={`flex items-center ${isActive ? 'bg-brand-50' : ''} rounded-xl`}>
+                      <Link
+                        href={page.href}
+                        onClick={closeAll}
+                        className={`flex-1 px-3 py-3 text-base font-semibold ${isActive ? 'text-brand-700' : 'text-slate-800'}`}
+                      >
+                        {page.label}
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setMobileExpanded(expanded ? null : page.href)}
+                        aria-expanded={expanded}
+                        aria-label={`${expanded ? 'Ocultar' : 'Ver'} secciones de ${page.label}`}
+                        className="p-3 text-slate-500 hover:text-brand-700"
+                      >
+                        <ChevronDown className={`w-5 h-5 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                    {expanded && (
+                      <ul className="ml-3 mb-2 pl-3 border-l-2 border-brand-200 space-y-0.5">
+                        {page.sections.map((s) => (
+                          <li key={s.id}>
+                            <Link
+                              href={sectionHref(page, s.id)}
+                              onClick={closeAll}
+                              className="block px-3 py-2 rounded-lg text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-800"
+                            >
+                              {s.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                );
+              })}
+              <li className="pt-3 mt-2 border-t border-slate-100">
+                <p className="px-3 pb-2 text-xs font-bold uppercase tracking-wider text-slate-400">Más recursos</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {EXTRA_LINKS.map((l) => (
+                    <Link
+                      key={l.href}
+                      href={l.href}
+                      onClick={closeAll}
+                      className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm font-medium text-slate-700 hover:border-brand-300 hover:bg-brand-50"
+                    >
+                      <l.icon className="w-4 h-4 text-brand-600 shrink-0" />
+                      {l.name}
+                    </Link>
+                  ))}
+                </div>
+              </li>
+            </ul>
+          </nav>
+        )}
+      </header>
+
+      {/* Desktop main nav (sticky) */}
+      <div ref={desktopNavRef} className="hidden xl:block sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm print:hidden">
+        <nav aria-label="Menú principal" className="max-w-7xl mx-auto px-6 2xl:px-8">
+          <ul className="flex items-center justify-between h-14">
+            {NAV_PAGES.map((page, idx) => {
+              const isActive = pathname === page.href;
+              const open = desktopOpen === page.href;
+              const wide = page.sections.length > 6;
+              const alignRight = idx >= NAV_PAGES.length - 2;
               return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2.5 rounded-lg text-base font-medium transition-all ${
-                    isActive
-                      ? 'text-blue-700 bg-blue-50 font-semibold'
-                      : 'text-slate-700 hover:bg-slate-50'
-                  }`}
+                <li
+                  key={page.href}
+                  className="relative"
+                  onMouseEnter={() => setDesktopOpen(page.href)}
+                  onMouseLeave={() => setDesktopOpen((cur) => (cur === page.href ? null : cur))}
                 >
-                  {link.name}
-                </Link>
+                  <div
+                    className={`flex items-center rounded-lg transition-colors ${
+                      isActive ? 'bg-brand-50 text-brand-700' : open ? 'bg-slate-100 text-brand-900' : 'text-slate-700'
+                    }`}
+                  >
+                    <Link href={page.href} onClick={closeAll} className="pl-2.5 2xl:pl-3 pr-0.5 py-2 text-[13px] 2xl:text-sm font-semibold whitespace-nowrap">
+                      {page.label}
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => setDesktopOpen(open ? null : page.href)}
+                      aria-expanded={open}
+                      aria-label={`Secciones de ${page.label}`}
+                      className="pr-1.5 2xl:pr-2 pl-0.5 py-2"
+                    >
+                      <ChevronDown className={`w-3.5 h-3.5 2xl:w-4 2xl:h-4 transition-transform ${open ? 'rotate-180' : ''}`} />
+                    </button>
+                  </div>
+                  {isActive && <span className="absolute -bottom-[9px] left-3 right-3 h-0.5 rounded-full bg-brand-500" />}
+
+                  {open && (
+                    <div className={`absolute top-full pt-2 ${alignRight ? 'right-0' : 'left-0'}`}>
+                      <div
+                        className={`rounded-2xl bg-white border border-slate-200 shadow-xl shadow-navy-900/10 p-2 ${
+                          wide ? 'w-[560px] grid grid-cols-2 gap-0.5' : 'w-72'
+                        }`}
+                      >
+                        {page.sections.map((s) => (
+                          <Link
+                            key={s.id}
+                            href={sectionHref(page, s.id)}
+                            onClick={closeAll}
+                            className="flex items-start gap-2 px-3 py-2.5 rounded-xl text-sm text-slate-700 hover:bg-brand-50 hover:text-brand-800 transition-colors"
+                          >
+                            <span className="w-1.5 h-1.5 mt-1.5 rounded-full bg-brand-400 shrink-0" />
+                            {s.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </li>
               );
             })}
-          </div>
-
-          <div className="pt-4 border-t border-slate-100">
-            {currentUser ? (
-              <div className="space-y-2">
-                <div className="px-3 py-2 bg-slate-50 rounded-lg text-sm text-slate-700">
-                  <span className="font-semibold block">{currentUser.nombre}</span>
-                  <span className="text-xs text-slate-500 uppercase">{currentUser.rol}</span>
-                </div>
-                <Link
-                  href={currentUser.rol === 'admin' ? '/dashboard/admin' : '/dashboard/asesor'}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full text-center bg-blue-600 text-white font-medium py-2 rounded-lg"
-                >
-                  Ir a mi Panel de Trabajo
-                </Link>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setMobileMenuOpen(false);
-                  }}
-                  className="block w-full text-center text-red-600 font-medium py-2 rounded-lg border border-red-200 hover:bg-red-50 text-sm"
-                >
-                  Cerrar Sesión
-                </button>
-              </div>
-            ) : (
-              <Link
-                href="/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 w-full bg-navy-900 text-white py-2.5 rounded-xl font-medium"
-              >
-                <UserCircle className="w-5 h-5 text-emerald-400" />
-                Acceso al Usuario (Asesores / Admin)
-              </Link>
-            )}
-          </div>
-        </div>
-      )}
-    </header>
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 }

@@ -31,62 +31,6 @@ export interface FAQ {
   respuesta: string;
 }
 
-export type RolUsuario = 'asesor' | 'admin';
-
-export interface Usuario {
-  id: string;
-  nombre: string;
-  email: string;
-  password?: string;
-  rol: RolUsuario;
-  cargo: string;
-  sucursal: string;
-  activo: boolean;
-}
-
-export interface MensajeContacto {
-  id: string;
-  fecha: string;
-  nombre: string;
-  email: string;
-  telefono: string;
-  tipoConsulta: string;
-  asunto: string;
-  mensaje: string;
-  estado: 'pendiente' | 'atendido';
-}
-
-export interface DetalleCredito {
-  tipoCredito: string;
-  monto: number;
-  plazoMeses: number;
-  tasaNominalMensual: number;
-  cuotaMensual: number;
-  totalPagar: number;
-  totalIntereses: number;
-}
-
-export interface DetalleCDT {
-  montoInversion: number;
-  plazoDias: number;
-  tasaEA: number;
-  rendimientoBruto: number;
-  retencionFuente: number;
-  rendimientoNeto: number;
-  totalRecibir: number;
-}
-
-export interface SimulacionGuardada {
-  id: string;
-  fecha: string;
-  tipo: 'credito' | 'cdt';
-  clienteNombre: string;
-  clienteIdentificacion: string;
-  clienteEmail: string;
-  detalles: DetalleCredito | DetalleCDT;
-  creadoPor: string;
-}
-
 export interface CreditoTasaConfig {
   tipo: string;
   nombre: string;

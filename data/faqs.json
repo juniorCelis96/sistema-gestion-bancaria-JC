@@ -32,8 +32,8 @@
   {
     "id": "faq-6",
     "categoria": "sistema",
-    "pregunta": "¿Quiénes pueden acceder al módulo de 'Acceso al usuario'?",
-    "respuesta": "El módulo de Acceso al Usuario está reservado para los colaboradores internos de la entidad: Asesores Financieros (quienes gestionan simulaciones asistidas y atención directa a clientes) y Administradores del Sistema (quienes gestionan el catálogo, actualizan tasas vigentes y consultan los reportes y PQRS)."
+    "pregunta": "¿Qué pasa con los datos que ingreso en el formulario de contacto o en los simuladores?",
+    "respuesta": "Este es un sitio de demostración de SENA FINANZAS S.A. con fines académicos. Los envíos del formulario de contacto y el registro de simulaciones son simulados: la información no se almacena en ninguna base de datos ni se envía por correo electrónico."
   },
   {
     "id": "faq-7",
