@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, ShieldCheck, Clock, Award } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck, Clock, Award, Smartphone } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -23,7 +23,7 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <span className="text-xl font-bold tracking-tight text-white">
+                <span translate="no" className="notranslate text-xl font-bold tracking-tight text-white">
                   SENA FINANZAS <span className="text-xs font-semibold px-2 py-0.5 rounded bg-brand-500/20 text-brand-300">S.A.</span>
                 </span>
                 <p className="text-xs italic text-brand-200/80 mt-0.5">Tu conocimiento, tu mejor inversión</p>
@@ -91,11 +91,25 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-slate-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
-                <span>Calle 14 # 3-28 Centro, La Dorada - Caldas</span>
+                <span>
+                  Carrera 1 #21-42
+                  <br />
+                  La Dorada, Caldas, Colombia
+                </span>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-brand-400 shrink-0" />
-                <span>(606) 857 2300</span>
+              <li className="flex items-start gap-2.5">
+                <Smartphone className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
+                <span>
+                  <span className="block text-[11px] text-slate-500">Celular / Atención</span>
+                  +57 322 6830093
+                </span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Phone className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
+                <span>
+                  <span className="block text-[11px] text-slate-500">Fijo institucional</span>
+                  (606) 8573904
+                </span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-brand-400 shrink-0" />
@@ -110,22 +124,41 @@ export default function Footer() {
 
         </div>
 
+        <div className="mt-12 pt-8 border-t border-white/10 flex justify-center">
+          <Image
+            src="/img/2090px-Sena_Colombia_logo_naranjado.svg_.png"
+            alt="Logo SENA"
+            width={2090}
+            height={2048}
+            className="w-20 h-auto sm:w-24"
+          />
+        </div>
+
         {/* banca */}
-        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <div className="mt-8 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 text-center md:text-left">
           <div>
             <span className="text-slate-400 font-semibold">Sistema de Información para una Entidad Financiera</span>
             <span className="mx-2">•</span>
-            <span>Centro Pecuario y Agroempresarial - SENA</span>
+            <span>Centro Pecuario y Agroempresarial Regional Caldas – SENA</span>
           </div>
           <Link href="/conclusiones#desarrollado-por" className="text-center md:text-right hover:text-slate-300 transition-colors">
-            <span>Desarrollado por: <strong>Gestión Bancaria – Ficha 3230956</strong></span>
+            <span>Desarrollado por: <strong>GESTIÓN BANCARIA Y DE ENTIDADES FINANCIERAS – Ficha 3230956</strong></span>
             <span className="mx-2">•</span>
             <span>Instructor: <strong>Junior Alexander Celis Bedoya</strong></span>
           </Link>
         </div>
 
-        <div className="mt-4 text-center text-xs text-slate-600">
-          © {new Date().getFullYear()} SENA FINANZAS S.A. Todos los derechos reservados. Sitio de demostración con fines académicos.
+        <div className="mt-4 text-center text-xs text-slate-600 space-y-1.5">
+          <p>© {new Date().getFullYear()} SENA FINANZAS S.A. Todos los derechos reservados. Sitio de demostración con fines académicos.</p>
+          <p className="text-[11px] text-slate-600">
+            <a href="https://www.flaticon.es/iconos-gratis/espana" title="españa iconos" target="_blank" rel="noopener noreferrer" className="hover:text-slate-400 underline-offset-2 hover:underline">
+              España iconos creados por verluk - Flaticon
+            </a>
+            <span className="mx-2">•</span>
+            <a href="https://www.flaticon.es/iconos-gratis/estados-unidos" title="estados unidos iconos" target="_blank" rel="noopener noreferrer" className="hover:text-slate-400 underline-offset-2 hover:underline">
+              Estados unidos iconos creados por IconMarketPK - Flaticon
+            </a>
+          </p>
         </div>
       </div>
     </footer>

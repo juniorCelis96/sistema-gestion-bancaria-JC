@@ -91,11 +91,11 @@ export default function ContactoSection() {
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-slate-900">Dirección Principal</div>
+                    <div className="text-xs font-bold text-slate-900">Dirección Física</div>
                     <p className="text-xs text-slate-600 mt-0.5">
-                      Calle 14 # 3-28, Sector Centro
+                      Carrera 1 #21-42
                     </p>
-                    <p className="text-[11px] font-semibold text-brand-700">La Dorada - Caldas, Colombia</p>
+                    <p className="text-[11px] font-semibold text-brand-700">La Dorada, Caldas, Colombia</p>
                   </div>
                 </div>
 
@@ -105,9 +105,9 @@ export default function ContactoSection() {
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-slate-900">Líneas Telefónicas</div>
-                    <p className="text-xs text-slate-600 mt-0.5">Sede La Dorada: (606) 857 2300</p>
-                    <p className="text-xs text-slate-600">Línea Nacional Gratuita: 01 8000 912 345</p>
+                    <div className="text-xs font-bold text-slate-900">Canales de Contacto Directo</div>
+                    <p className="text-xs text-slate-600 mt-0.5">Celular / Atención: +57 322 6830093</p>
+                    <p className="text-xs text-slate-600">Fijo institucional: (606) 8573904</p>
                   </div>
                 </div>
 

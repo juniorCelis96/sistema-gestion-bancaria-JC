@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown, Calculator, ClipboardList, MapPin, HelpCircle, Briefcase } from 'lucide-react';
 import { NAV_PAGES, sectionHref } from '@/lib/navigation';
+import { LanguageDropdown, LanguageToggle } from './LanguageSwitcher';
 
 const EXTRA_LINKS = [
   { name: 'Taller de presupuesto', short: 'Taller', href: '/taller-presupuesto', icon: ClipboardList },
@@ -57,8 +58,10 @@ export default function Navbar() {
             <span>Superintendencia Financiera de Colombia • Seguro de Depósitos Fogafín</span>
           </div>
           <div className="hidden sm:flex items-center gap-4 text-slate-400">
-            <span>Línea Gratuita Nacional: 01 8000 912 345</span>
-            <span className="hidden md:inline">• La Dorada, Caldas</span>
+            <LanguageDropdown />
+            <span className="w-px h-3.5 bg-white/20" aria-hidden />
+            <span className="whitespace-nowrap">Línea de atención: +57 322 6830093</span>
+            <span className="hidden lg:inline whitespace-nowrap">• La Dorada, Caldas</span>
           </div>
         </div>
       </div>
@@ -67,7 +70,7 @@ export default function Navbar() {
       <header className="sticky top-0 xl:static z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm xl:shadow-none print:hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            <Link href="/" onClick={closeAll} className="flex items-center gap-3 group min-w-0">
+            <Link href="/" onClick={closeAll} className="flex items-center gap-2 sm:gap-3 group min-w-0">
               <Image
                 src="/logo_sena_fin_fondo_blanco.jpeg"
                 alt="SENA FINANZAS S.A."
@@ -77,10 +80,10 @@ export default function Navbar() {
                 className="w-12 h-12 sm:w-14 sm:h-14 object-contain group-hover:scale-105 transition-transform shrink-0"
               />
               <div className="min-w-0">
-                <span className="text-base sm:text-xl font-extrabold tracking-tight text-navy-900 flex items-center gap-1.5">
+                <span translate="no" className="notranslate text-base sm:text-xl font-extrabold tracking-tight text-navy-900 flex items-center gap-1.5">
                   SENA FINANZAS <span className="text-xs px-2 py-0.5 rounded-full bg-brand-100 text-brand-700 font-semibold">S.A.</span>
                 </span>
-                <p className="text-[11px] sm:text-xs text-slate-500 font-medium italic tracking-wide truncate">Tu conocimiento, tu mejor inversión</p>
+                <p className="text-[11px] sm:text-xs text-slate-500 font-medium italic sm:tracking-wide truncate">Tu conocimiento, tu mejor inversión</p>
               </div>
             </Link>
 
@@ -107,17 +110,21 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile menu button */}
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen((v) => !v)}
-              className="xl:hidden p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
-              aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
-              aria-expanded={mobileMenuOpen}
-              aria-controls="menu-movil"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            <div className="xl:hidden flex items-center gap-1.5 shrink-0">
+              <div className="sm:hidden">
+                <LanguageDropdown variant="compact" />
+              </div>
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen((v) => !v)}
+                className="p-2 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-400"
+                aria-label={mobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="menu-movil"
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -129,6 +136,9 @@ export default function Navbar() {
             className="xl:hidden border-t border-slate-200 bg-white max-h-[calc(100vh-5rem)] overflow-y-auto overscroll-contain"
           >
             <ul className="max-w-7xl mx-auto px-4 sm:px-6 py-3 space-y-1">
+              <li className="pb-3 mb-2 border-b border-slate-100">
+                <LanguageToggle />
+              </li>
               {NAV_PAGES.map((page) => {
                 const isActive = pathname === page.href;
                 const expanded = mobileExpanded === page.href;

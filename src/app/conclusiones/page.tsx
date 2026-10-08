@@ -310,16 +310,16 @@ export default function ConclusionesPage() {
           <div className="absolute -top-24 -left-24 w-72 h-72 bg-brand-200/40 rounded-full blur-3xl pointer-events-none" />
           <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-0">
             <div className="lg:col-span-4 flex flex-col items-center justify-center text-center gap-4 p-8 bg-navy-900 text-white">
-              <div className="w-28 h-28 rounded-3xl bg-white p-2 shadow-xl">
-                <Image src="/logo_sena_fin_fondo_blanco.jpeg" alt="SENA FINANZAS S.A." width={112} height={112} className="w-full h-full object-contain" />
+              <div className="w-32 h-32 rounded-3xl bg-white p-3 shadow-xl">
+                <Image src="/img/Logo-de-SENA-png-verde-300x300-1.png" alt="Logo SENA" width={300} height={300} className="w-full h-full object-contain" />
               </div>
               <div>
-                <p className="text-xl font-extrabold">SENA FINANZAS S.A.</p>
-                <p className="text-sm italic text-brand-200">Tu conocimiento, tu mejor inversión</p>
+                <p className="text-xl font-extrabold">SENA</p>
+                <p className="text-sm text-brand-200">Servicio Nacional de Aprendizaje</p>
               </div>
-              <span className="inline-flex items-center gap-1.5 text-xs text-slate-300">
-                <MapPin className="w-3.5 h-3.5 text-brand-300" />
-                Centro Pecuario y Agroempresarial – SENA
+              <span className="inline-flex items-start gap-1.5 text-xs text-slate-300 max-w-xs">
+                <MapPin className="w-3.5 h-3.5 text-brand-300 shrink-0 mt-0.5" />
+                Centro Pecuario y Agroempresarial Regional Caldas – SENA
               </span>
             </div>
 
@@ -330,7 +330,7 @@ export default function ConclusionesPage() {
                 </span>
                 <div>
                   <p className="text-xs font-bold uppercase tracking-wider text-brand-600">Equipo de desarrollo</p>
-                  <p className="text-2xl sm:text-3xl font-extrabold text-navy-900">Gestión Bancaria</p>
+                  <p className="text-xl sm:text-2xl font-extrabold text-navy-900 leading-tight">GESTIÓN BANCARIA Y DE ENTIDADES FINANCIERAS</p>
                   <span className="inline-flex mt-1.5 px-3 py-1 rounded-full bg-navy-900 text-brand-200 text-sm font-bold tracking-wide">Ficha 3230956</span>
                 </div>
               </div>
